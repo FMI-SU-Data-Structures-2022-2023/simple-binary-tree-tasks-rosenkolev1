@@ -1,8 +1,6 @@
 #include "catch2/catch_all.hpp"
 #include "solution.h"
 
-using namespace std;
-
 void clean(Node*& n) {
     if (n == nullptr) return;
     clean(n->left);
@@ -103,7 +101,6 @@ TEST_CASE("Validate isBST") {
     Node* test = new Node(5);
     CHECK(isBST(test) == true);
 
-
     test->left = new Node(0);
     CHECK(isBST(test) == true);
 
@@ -119,6 +116,66 @@ TEST_CASE("Validate isBST") {
 
     test->right->left = new Node(30);
     CHECK(isBST(test) == false);
+
+    clean(test);
+}
+
+TEST_CASE("Validate print inorder") {
+
+    CHECK(getInorder(nullptr) == "");
+
+    Node* test = new Node(5);
+    CHECK(getInorder(test) == "5, ");
+
+    test->left = new Node(10);
+    test->left->left = new Node(3);
+    test->left->right = new Node(6);
+    test->right = new Node(7);
+    test->right->left = new Node(14);
+    test->right->right = new Node(-4);
+
+    std::string expectedResult = "3, 10, 6, 5, 14, 7, -4, ";
+    CHECK(getInorder(test) == expectedResult);
+
+    clean(test);
+}
+
+TEST_CASE("Validate print preorder") {
+
+    CHECK(getPreorder(nullptr) == "");
+
+    Node* test = new Node(5);
+    CHECK(getPreorder(test) == "5, ");
+
+    test->left = new Node(10);
+    test->left->left = new Node(3);
+    test->left->right = new Node(6);
+    test->right = new Node(7);
+    test->right->left = new Node(14);
+    test->right->right = new Node(-4);
+
+    std::string expectedResult = "5, 10, 3, 6, 7, 14, -4, ";
+    CHECK(getPreorder(test) == expectedResult);
+
+    clean(test);
+}
+
+TEST_CASE("Validate print postorder") {
+
+    CHECK(getPostorder(nullptr) == "");
+
+    Node* test = new Node(5);
+    CHECK(getPostorder(test) == "5, ");
+
+    test->left = new Node(10);
+    test->left->left = new Node(3);
+    test->left->right = new Node(6);
+    test->right = new Node(7);
+    test->right->left = new Node(14);
+    test->right->right = new Node(-4);
+
+    std::string expectedResult = "3, 6, 10, 14, -4, 7, 5, ";
+    CHECK(getPostorder(test) == expectedResult);
 
     clean(test);
 }
