@@ -1,4 +1,5 @@
 #ifndef WEEK6_TREE_H
+#include <iostream>
 
 struct Node {
     int key;
@@ -14,6 +15,9 @@ int sumElementsAtLevel(Node*, unsigned);
 int height(Node*);
 bool isBST(Node*);
 bool isSymmetric(Node*);
+std::string getInorder(Node* tree);
+std::string getPreorder(Node* tree);
+std::string getPostorder(Node* tree);
 
 #define WEEK6_TREE_H
 
